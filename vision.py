@@ -210,8 +210,7 @@ if st.session_state.continuar:
             )
 
                 # llama a la función para clasificar el texto detectado
-                clasificar_texto()
-                tipo = clasificar_texto()
+                tipo = clasificar_texto(respuesta)
 
                 #boton para convertir texto a JSON y mostrarlo en pantalla
                 if st.button("Convertir a JSON") and st.session_state.paquete_json is None:
