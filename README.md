@@ -1,0 +1,1 @@
+Ejemplo básico de visión OCR
