@@ -125,19 +125,32 @@ def enviar_paquetes(paquete_texto, paquete_json, tipo):
 
     import requests
 
-    # url de la API
-    # url = "https://www.androbit.cl/api/"
-    url = "http://localhost/dashboard/androbit.cl/api/"
+  # URL de la API
+    url = "http://www.androbit.cl/api/"
+    # url = "http://localhost/dashboard/androbit.cl/api/"
 
-    # empaqueta datos en un diccionario
+    # API Key
+    headers = {
+        "X-API-Key": "58e5159435a817494e4275c82a60ac153bf7826df52b393a36e9bec1133e0949",
+        "Content-Type": "application/json"
+    }
+
+    # Datos
     datos = {
         "paquete_texto": paquete_texto,
         "paquete_json": paquete_json,
         "clasificacion": tipo
     }
 
+    # Envío
+    respuesta_servidor = requests.post(
+        url,
+        json=datos,
+        headers=headers
+    )
+
     # respuesta del servidor al enviar datos a la API
-    respuesta_servidor = requests.post(url, json=datos)
+    # respuesta_servidor = requests.post(url, json=datos)
 
     st.write(respuesta_servidor.status_code)
     st.write(respuesta_servidor.text)
