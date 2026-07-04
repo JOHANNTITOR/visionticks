@@ -125,7 +125,7 @@ def enviar_paquetes(paquete_texto, paquete_json, tipo):
 
     import requests
 
-  # URL de la API
+  # URL del ENDPOINT de la API
     url = "http://www.androbit.cl/api/"
     # url = "http://localhost/dashboard/androbit.cl/api/"
 
@@ -226,7 +226,7 @@ if st.session_state.continuar:
                 tipo = clasificar_texto(respuesta)
 
                 #boton para convertir texto a JSON y mostrarlo en pantalla
-                if st.button("Convertir a JSON") and st.session_state.paquete_json is None:
+                if st.button("Convertir a JSON y envíar a NUBE") and st.session_state.paquete_json is None:
                     try:
                         paquete_json = promt_para_convertir_texto_a_json(respuesta.output_text, client)
 
@@ -237,11 +237,13 @@ if st.session_state.continuar:
                             height=300
                         )
 
+                        # enviar datos a endpoint de la API
+                        enviar_paquetes(paquete_texto, paquete_json, tipo)
+
                     except AttributeError:
                         st.error("Error: No se pudo obtener la respuesta del modelo. Verifica la conexión y la cuota de OpenAI.")
 
-                    if st.button("Envíar datos a la API"):
-                        enviar_paquetes(paquete_texto, paquete_json, tipo)
+
 
             except AttributeError:
                 st.error("Error: No se pudo obtener la respuesta del modelo. Verifica la conexión y la cuota de OpenAI.")
@@ -284,7 +286,7 @@ if st.session_state.continuar:
             tipo = clasificar_texto(respuesta)
 
             #boton para convertir texto a JSON y mostrarlo en pantalla
-            if st.button("Convertir a JSON") and st.session_state.paquete_json is None:  # Ejecutar conversión a JSON solo una vez
+            if st.button("Convertir a JSON y envíar a NUBE") and st.session_state.paquete_json is None:  # Ejecutar conversión a JSON solo una vez
                 try:
                     paquete_json = promt_para_convertir_texto_a_json(respuesta.output_text, client)
 
@@ -295,7 +297,7 @@ if st.session_state.continuar:
                         height=300
                     )
 
-                    # enviar datos a la API
+                    # enviar datos a endpoint de la API
                     enviar_paquetes(paquete_texto, paquete_json, tipo)
 
                 except AttributeError:
